@@ -5,6 +5,18 @@ class Counter extends Component {
     return (
       <div>
         <div className="row">
+
+          <div className="col-md-1">
+            <span style={{ fontSize: 24 }} >
+              {this.props.name}
+            </span>
+          </div>
+          <div className="col-md-1">
+            <span style={{ fontSize: 24 }} >
+              ${this.props.price}
+            </span>
+          </div>
+
           <div className="col-md-1">
             <span style={{ fontSize: 24 }} className={this.getBadgeClasses()}>
               {this.formatCount()}
