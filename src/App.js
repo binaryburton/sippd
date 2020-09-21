@@ -37,13 +37,21 @@ class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    if(formValid(this.state)) {
-      console.log('GREAT SUCCESS');
+    if(formValid(this.state) && e.target.name.value.length > 0 && e.target.price.value.length > 0) {
+      const newItem = {
+        id: uuidv4(),
+        value: 0,
+        name: e.target.name.value,
+        price: e.target.price.value
+      };
+  
+      this.setState({
+        counters: [...this.state.counters, newItem]
+      });
     } else {
-      console.log('POOP');
+      console.error('Invalid Form');
     }
   }
-
 
   handleChange = e => {
     e.preventDefault();
@@ -58,7 +66,7 @@ class App extends Component {
         break;
       case "price":
         formErrors.price =
-        value.length > 8 ? "Item is too pricey" : "";
+        value.length < 1 ? "Item needs a price" : "";
         break;
       default:
         break;
@@ -125,7 +133,7 @@ class App extends Component {
   render() {
 
     const { formErrors } = this.state;
-    
+
     return (
       <div>
         <NavBar
@@ -144,7 +152,7 @@ class App extends Component {
               onChange={this.handleChange}>
             </input>
             {formErrors.name.length > 0 && (
-                <span className="errorMessage">{formErrors.price}</span>
+                <span className="errorMessage">{formErrors.name}</span>
               )}
           </div>
           <div>
@@ -155,11 +163,11 @@ class App extends Component {
               type="number" 
               min="0"
               step="1"
-              placeholder="7.25"
+              placeholder="7"
               onChange={this.handleChange}>
             </input>
             {formErrors.price.length > 0 && (
-                <span className="errorMessage">{formErrors.name}</span>
+                <span className="errorMessage">{formErrors.price}</span>
               )}
           </div>
           <button type="submit"> Submit Item </button>
