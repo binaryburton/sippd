@@ -12,8 +12,6 @@ class Counters extends Component {
       onDecrement,
       counters,
       onRestart,
-      // onAddItem,
-      // totalPrice
     } = this.props;
 
     return (
@@ -32,31 +30,6 @@ class Counters extends Component {
         >
           <i className="fa fa-recycle" aria-hidden="true" />
         </button>
-{/* 
-        <form onSubmit={(e) => {onAddItem(e)}}>
-          <div>
-            <label> Add Item Name </label>
-            <input 
-              id="name"
-              name="name" 
-              type="text" 
-              placeholder="Wine">
-            </input>
-          </div>
-          <div>
-            <label> Add Item Price </label>
-            <input 
-              id="price"
-              name="price" 
-              type="number" 
-              min="0"
-              step="1"
-              placeholder="7.25">
-            </input>
-          </div>
-          <button type="submit"> Submit Item </button>
-        </form> */}
-
 
         {counters.map(counter => (
           <Counter

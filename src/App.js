@@ -42,7 +42,7 @@ class App extends Component {
         id: uuidv4(),
         value: 0,
         name: e.target.name.value,
-        price: e.target.price.value
+        price: parseInt(e.target.price.value)
       };
   
       this.setState({
@@ -56,7 +56,6 @@ class App extends Component {
   handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
@@ -71,7 +70,6 @@ class App extends Component {
       default:
         break;
     }
-
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
 
@@ -102,28 +100,6 @@ class App extends Component {
   handleDelete = counterId => {
     const counters = this.state.counters.filter(c => c.id !== counterId);
     this.setState({ counters });
-  };
-
-  handleAddItem = (e) => {
-    e.preventDefault();
-
-    const newItem = {
-      id: uuidv4(),
-      value: 0,
-      name: e.target.name.value,
-      price: e.target.price.value
-    };
-
-    this.setState({
-      counters: [...this.state.counters, newItem]
-    });
-  };
-
-
-  handleTotalPrice = () => {
-    const yo = this.state.counters.reduce((a, b) => ({price: a.price + b.price}));
-    console.log('yo', yo);
-    return yo;
   };
 
   handleRestart = () => {
@@ -183,22 +159,14 @@ class App extends Component {
             onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
             onRestart={this.handleRestart}
-            onAddItem={this.handleAddItem}
-            totalPrice={this.handleTotalPrice}
           />
 
-
-
         <div>
-          Total Items: 
+          Total Items: {this.state.counters.reduce((a, b) => a + (b['value'] || 0), 0)}
         </div>
         <div>
-          {/* Total Price: {totalPrice} */}
+          Total Price: ${this.state.counters.reduce((a, b) => a + (b['price'] || 0), 0)}
         </div>
-        {/* <button onClick={}>
-          yoyoyo
-        </button> */}
-
         </main>
       </div>
     );
