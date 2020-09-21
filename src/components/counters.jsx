@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import Counter from "./counter";
 
 class Counters extends Component {
-
   render() {
-
     const {
       onReset,
       onIncrement,
@@ -31,7 +29,7 @@ class Counters extends Component {
           <i className="fa fa-recycle" aria-hidden="true" />
         </button>
 
-        {counters.map(counter => (
+        {counters.map((counter) => (
           <Counter
             key={counter.id}
             counter={counter}
@@ -45,9 +43,6 @@ class Counters extends Component {
       </div>
     );
   }
-
 }
-
-
 
 export default Counters;

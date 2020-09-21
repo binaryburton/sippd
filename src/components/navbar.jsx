@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-// Stateless Functional Component
-
-const NavBar = ({ totalCounters }) => {
+const NavBar = ({ totalCounters, counters }) => {
+  const filteredCounters = counters.filter((counter) => counter.value !== 0);
 
   return (
     <nav className="navbar navbar-light bg-light">
@@ -12,6 +12,18 @@ const NavBar = ({ totalCounters }) => {
           {totalCounters}
         </span>
         Items
+        <Link
+          to={{
+            pathname: "/checkout",
+            state: {
+              counters: { filteredCounters },
+            },
+          }}
+        >
+          <span style={{marginLeft: '1rem'}}>
+            Checkout
+          </span>
+        </Link>
       </div>
     </nav>
   );
